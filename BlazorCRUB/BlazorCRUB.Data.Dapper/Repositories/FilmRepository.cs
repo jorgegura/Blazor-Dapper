@@ -27,7 +27,7 @@ namespace BlazorCRUB.Data.Dapper.Repositories
         {
             var db = dbConnection();
 
-            var sql = @"DELEE FROM Films WHERE Id = @Id";
+            var sql = @"DELETE FROM Films WHERE Id = @Id";
 
             var result = await db.ExecuteAsync(sql.ToString(), new { Id = id });
 
@@ -46,8 +46,8 @@ namespace BlazorCRUB.Data.Dapper.Repositories
         {
             var db = dbConnection();
 
-            var sql = @"SELECT Id, Titulo, Director, ReleaseDate
-                        FROM [dbo].[Film]
+            var sql = @"SELECT Id, Title, Director, ReleaseDate
+                        FROM [dbo].[Films]
                         WHERE Id=@Id";
 
             return await db.QueryFirstOrDefaultAsync<Film>(sql.ToString(), new { Id = id });
@@ -56,7 +56,7 @@ namespace BlazorCRUB.Data.Dapper.Repositories
         {
             var db = dbConnection();
 
-            var sql = @"INSER INTO Films (Title,Director, ReleaseDate)
+            var sql = @"INSERT INTO Films (Title,Director, ReleaseDate)
                         VALUES (@Title, @Director, @ReleaseDate)";
 
             var result = await db.ExecuteAsync(sql.ToString(),
@@ -69,7 +69,7 @@ namespace BlazorCRUB.Data.Dapper.Repositories
             var db = dbConnection();
 
             var sql = @"UPDATE Films 
-                        SET Title=@Title, Director=@Director, ReleaseDate=@ReleaseDate)
+                        SET Title=@Title, Director=@Director, ReleaseDate=@ReleaseDate
                         WHERE Id = @Id";
 
             var result = await db.ExecuteAsync(sql.ToString(),
